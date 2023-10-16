@@ -1,5 +1,8 @@
 package com.ssd.employee.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +59,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 		apiResponseDto.setEmp(empDto);
 		return apiResponseDto;
 	}
-	
+	@Override
+	public List<EmployeeDto> getAllEmployees() {
+		List<EmployeeDto> emdtolist = new ArrayList<>();
+		List<Employee> emplist = employeeRepository.findAll();
+		for(Employee emp : emplist) {
+			EmployeeDto dto= mapToDto(emp);
+			emdtolist.add(dto);
+			
+		}
+		return emdtolist;
+	}
+
 	
 	
 	public EmployeeDto mapToDto(Employee dto)
@@ -68,6 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	{
 		return mapper.map(dto, Employee.class);
 	}
+
 
 	
 	
