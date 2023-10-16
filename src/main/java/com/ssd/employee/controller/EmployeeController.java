@@ -1,5 +1,7 @@
 package com.ssd.employee.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -34,4 +36,8 @@ public class EmployeeController {
 	{
 		return new ResponseEntity<APIResponseDto>(employeeService.getEmployeeById(id),HttpStatus.OK);
 	}
+	@GetMapping("/employee")
+	 public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
+		return new ResponseEntity<List<EmployeeDto>>(employeeService.getAllEmployees(),HttpStatus.OK);
+	 }
 }
